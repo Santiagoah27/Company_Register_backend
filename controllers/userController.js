@@ -27,7 +27,7 @@ const register = asyncHandler(async (req, res) => {
         name: user.name,
         token: user.token
     })
-    res.json({ msg: "Usuario Creado Correctamente, Revisa tu email pata confirmar tu cuenta"})
+    res.json({ msg: "Usuario Creado Correctamente, Revisa tu email para confirmar tu cuenta"})
 })
 
 const authenticate = asyncHandler(async (req, res) => {
@@ -61,7 +61,7 @@ const confirm = asyncHandler( async (req, res) => {
     const { token } = req.params;
     const userConfirm = await User.findOne({token});
     if(!userConfirm) {
-        return res.status(403).json({ msg: createError(403, "Token no valido").message });
+        return res.status(403).json({ msg: "Token Invalido" });
     }
 
     userConfirm.confirmed = true;
