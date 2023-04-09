@@ -118,3 +118,15 @@ Parámetros:
 - `itemName` (string, opcional): Nombre del artículo.
 - `quantity` (number, opcional): Cantidad del artículo.
 - `price` (number, opcional): Precio del artículo.
+
+### Eliminar artículo
+
+DELETE `/api/articles/:id`
+
+### Enviar PDF de inventario
+
+POST `/api/articles/send-inventory-pdf`
+
+Parámetros:
+- `email` (string): Dirección de correo electrónico a la que se enviará el PDF.
+
