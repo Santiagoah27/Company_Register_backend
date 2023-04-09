@@ -1,6 +1,7 @@
 import Company from "../models/Company.js"
 import asyncHandler from "express-async-handler";
 import Articles from "../models/Articles.js"
+import { sendInventoryByPdf } from "../helpers/email.js";
 
 const createError = (status, message) => {
     const error = new Error(message);
@@ -53,8 +54,34 @@ const deleteArticle = asyncHandler(async (req, res) => {
     res.json({ msg: error.message })
 })
 
+const sendInventoryPDF = asyncHandler(async (req, res) => {
+  const pdfFile = req.body.pdf;
+  const email = req.body.email;
+
+  if (!pdfFile) {
+    return res.status(400).json({ message: "No se recibió el archivo PDF" });
+  }
+
+  if (!email) {
+    return res.status(400).json({ message: "No se recibió el correo electrónico" });
+  }
+
+  const pdfBuffer = Buffer.from(pdfFile, "base64");
+
+  try {
+    await sendInventoryByPdf({ email, pdfBuffer });
+    res.status(200).json({ message: "PDF enviado con éxito" });
+  } catch (error) {
+    console.error("Error al enviar el email:", error);
+    res.status(500).json({ message: "Error al enviar el PDF por correo" });
+  }
+});
+  
+  
+
 export{
     addArticle,
     editArticle,
-    deleteArticle
+    deleteArticle,
+    sendInventoryPDF
 }
