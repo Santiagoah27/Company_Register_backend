@@ -14,7 +14,8 @@ El backend de esta aplicación maneja la autenticación de usuarios, el registro
 
 ## Pruebas
 
-Ejecute `npm test` para ejecutar las pruebas unitarias y de integración.
+En la carpeta config en el archivo axiosClient.jsx debe cambiar import.meta por process
+Ejecute `npm test` para ejecutar las pruebas unitarias.
 
 ## API y rutas disponibles
 
