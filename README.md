@@ -14,7 +14,7 @@ El backend de esta aplicación maneja la autenticación de usuarios, el registro
 
 ## Pruebas
 
-1. En la carpeta config en el archivo axiosClient.jsx debe cambiar import.meta por process
+1. En la carpeta config en el archivo axiosClient.jsx debe cambiar en la baseURL import.meta por process
 2. Ejecute `npm test` para ejecutar las pruebas unitarias.
 
 ## API y rutas disponibles
