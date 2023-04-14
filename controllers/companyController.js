@@ -45,8 +45,17 @@ const getCompany = asyncHandler(async (req, res) => {
 // Edit company by Id
 const editCompany = asyncHandler( async (req, res) => {
     const { id } = req.params;
+    const { NIT } = req.body;
 
+    const companyExists = await Company.findOne({ NIT: NIT});
     const company = await getCompanyById(id);
+
+    if(company.NIT !== NIT){
+        if(companyExists) {
+            const error = new Error('Empresa ya registrada')
+            return res.status(400).json({msg: error.message})
+        }
+    }
 
     company.name = req.body.name || company.name;
     company.address = req.body.address || company.address;
